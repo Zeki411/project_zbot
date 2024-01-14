@@ -1,0 +1,18 @@
+FROM ros:iron-ros-base-jammy
+
+RUN apt-get update \
+    && apt-get install -y git
+
+
+# Create a user
+ARG DOCKER_USER='zbot_stellan2'
+RUN addgroup $DOCKER_USER && adduser --ingroup $DOCKER_USER $DOCKER_USER
+USER $DOCKER_USER
+
+# Setup ROS
+RUN echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
+
+RUN mkdir -p /home/$DOCKER_USER/zbot_stellan2_ws/src
+RUN git clone https://github.com/Zeki411/STELLA_N2_PI_X4_ROS2_v2.0.git
+
+

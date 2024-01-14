@@ -1,0 +1,14 @@
+FROM ros:iron-ros-base-jammy
+
+RUN apt-get update && apt-get install -y
+
+
+# Create a user
+ARG DOCKER_USER='zbot'
+RUN addgroup $DOCKER_USER && adduser --ingroup $DOCKER_USER $DOCKER_USER
+USER $DOCKER_USER
+
+# Setup ROS
+RUN echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
+
+
